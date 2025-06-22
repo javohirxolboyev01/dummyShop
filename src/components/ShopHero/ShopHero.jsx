@@ -3,7 +3,6 @@ import { Select } from "antd";
 import { NavLink, useSearchParams } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
 import HeroShop from "@/assets/hero/HeroShop.svg";
-
 const { Option } = Select;
 
 const ShopHero = ({ total, currentPage, pageSize, onPageChange }) => {

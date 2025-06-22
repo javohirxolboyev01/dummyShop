@@ -66,16 +66,16 @@ const HomeProduct = ({ data }) => {
               <h2 className="text-gray-800 font-semibold text-base">
                 {item.title}
               </h2>
-              <p className="text-sm text-gray-500 mt-1">{item.description}</p>
+              <p className="text-sm text-gray-500 mt-1">
+                {item.shippingInformation}
+              </p>
               <div className="mt-2 flex items-center gap-2">
                 <p className="text-lg font-bold text-gray-800">
                   {item.price.toLocaleString()}$
                 </p>
-                {item.oldPrice && (
-                  <p className="text-sm text-gray-400 line-through">
-                    {item.oldPrice.toLocaleString()} $
-                  </p>
-                )}
+                <p className="text-sm text-gray-400 line-through">
+                  {(item.price * 1.2).toFixed(0)}$
+                </p>
               </div>
             </div>
           </div>

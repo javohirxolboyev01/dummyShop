@@ -40,7 +40,7 @@ const Wishlist = () => {
                   {item.title}
                 </h2>
                 <p className="text-sm text-gray-500 mt-1 line-clamp-2">
-                  {item.description || "Yetkazib berish mavjud"}
+                  {item.shippingInformation || "Yetkazib berish mavjud"}
                 </p>
                 <div className="mt-2 flex items-center gap-2">
                   <p className="text-lg font-bold text-gray-800">

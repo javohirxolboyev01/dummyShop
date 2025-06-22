@@ -4,6 +4,8 @@ import { NavLink } from "react-router-dom";
 import { TbUserExclamation } from "react-icons/tb";
 import { CiHeart, CiSearch } from "react-icons/ci";
 import { IoCartOutline } from "react-icons/io5";
+import CartIcon from "../cardIcon/CardIcon";
+import WishIcon from "../wishlistIcon/WishIcon";
 
 const Navbar = () => {
   return (
@@ -38,10 +40,10 @@ const Navbar = () => {
           <TbUserExclamation className="cursor-pointer" />
           <CiSearch className="cursor-pointer" />
           <NavLink to="/wishlist">
-            <CiHeart className="cursor-pointer" />
+            <WishIcon className="cursor-pointer bg-red-600" />
           </NavLink>
           <NavLink to="/cart">
-            <IoCartOutline className="cursor-pointer" />
+            <CartIcon className="cursor-pointer" />
           </NavLink>
         </div>
       </div>
