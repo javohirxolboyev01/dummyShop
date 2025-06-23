@@ -1,13 +1,13 @@
 import React from "react";
 import Logo from "../../assets/logo/Logo.png";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { TbUserExclamation } from "react-icons/tb";
-import { CiHeart, CiSearch } from "react-icons/ci";
-import { IoCartOutline } from "react-icons/io5";
+import { CiSearch } from "react-icons/ci";
 import CartIcon from "../cardIcon/CardIcon";
 import WishIcon from "../wishlistIcon/WishIcon";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   return (
     <div className="bg-white text-black shadow-md w-full">
       <div className="container mx-auto flex flex-col sm:flex-row justify-between items-center px-4 sm:px-6 py-4 gap-4">
@@ -39,12 +39,10 @@ const Navbar = () => {
         <div className="flex items-center text-[18px] sm:text-[22px] gap-4 sm:gap-6">
           <TbUserExclamation className="cursor-pointer" />
           <CiSearch className="cursor-pointer" />
-          <NavLink to="/wishlist">
-            <WishIcon className="cursor-pointer bg-red-600" />
-          </NavLink>
-          <NavLink to="/cart">
-            <CartIcon className="cursor-pointer" />
-          </NavLink>
+
+          <WishIcon to="/wishlist" className="cursor-pointer bg-red-600" />
+
+          <CartIcon to="/cart" className="cursor-pointer" />
         </div>
       </div>
     </div>

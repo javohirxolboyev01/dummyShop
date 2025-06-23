@@ -45,11 +45,14 @@ const HomeProduct = ({ data }) => {
                   <button className="absolute top-2 right-2 bg-white p-1 rounded-full text-gray-500 hover:text-red-600 shadow">
                     {wishlistItem.some((wish) => wish.id === item.id) ? (
                       <FaHeart
-                        className="text-red-500"
+                        className="text-red-500 text-lg sm:text-xl"
                         onClick={() => dispatch(removeFromWishlist(item))}
                       />
                     ) : (
-                      <CiHeart onClick={() => dispatch(wishlist(item))} />
+                      <CiHeart
+                        className="text-lg sm:text-xl"
+                        onClick={() => dispatch(wishlist(item))}
+                      />
                     )}
                   </button>
                 </div>

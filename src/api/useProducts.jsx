@@ -2,17 +2,21 @@ import { useQuery } from "@tanstack/react-query";
 import { api } from ".";
 
 export const useProducts = () => {
-  // const getProduct = ({ limit = 16, skip = 0 }) => {
-  //   return useQuery(["products", limit, skip], () =>
-  //     axios
-  //       .get(`https://dummyjson.com/products?limit=${limit}&skip=${skip}`)
-  //       .then((res) => res.data)
-  //   );
-  // };
+  const getProducts = (params) =>
+    useQuery({
+      queryKey: ["products", params],
+      queryFn: () => api.get("products", { params }),
+    });
 
-  const getProducts = useQuery({
+  const getProduct = useQuery({
     queryKey: ["products"],
     queryFn: () => api.get("products"),
   });
-  return { getProducts  };
+
+  const getProductt = (id) =>
+    useQuery({
+      queryKey: ["products", id],
+      queryFn: () => api.get(`products/${id}`),
+    });
+  return { getProducts, getProduct, getProductt };
 };

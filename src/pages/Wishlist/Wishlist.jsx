@@ -29,10 +29,11 @@ const Wishlist = () => {
                 >
                   <CiHeart className="text-2xl" />
                 </button>
-
-                <span className="absolute top-2 left-2 bg-blue-500 text-white text-xs px-2 py-1 rounded-full font-semibold">
-                  Tez yetkazish
-                </span>
+                {item.discountPercentage && (
+                  <span className="absolute top-2 left-2 bg-red-500 text-white text-[10px] sm:text-xs px-2 py-1 rounded-full">
+                    -{item.discountPercentage}%
+                  </span>
+                )}
               </div>
 
               <div className="p-4 bg-gray-100 h-full">

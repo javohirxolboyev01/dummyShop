@@ -7,8 +7,8 @@ import HomeProduct from "@/components/HomeProduct/HomeProduct";
 import { useProducts } from "@/api/useProducts";
 
 const Home = () => {
-  const { getProducts } = useProducts();
-  const { data } = getProducts;
+  const { getProduct } = useProducts();
+  const { data } = getProduct;
   console.log(data);
   return (
     <div>

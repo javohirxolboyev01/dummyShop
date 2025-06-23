@@ -1,6 +1,7 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy } from "react";
+import { Suspense } from "../../../utilist";
 import { useRoutes } from "react-router-dom";
-const ProductDetailes = lazy(() => import("../ProductDetailes"));
+const ProductDetailes = lazy(() => import("../productDetaile/ProductDetailes"));
 const Layout = lazy(() => import("@/components/Layout/Layout"));
 const Home = lazy(() => import("../Home/Home"));
 const Shop = lazy(() => import("../Shop/Shop"));
