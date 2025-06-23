@@ -104,9 +104,10 @@ const ProductDetailes = () => {
             <button className="w-10 h-10 rounded border">+</button>
           </div>
 
-          <button className="w-full py-3 bg-black text-white rounded hover:bg-gray-800 transition">
+          <button className="w-full py-3 border border-gray-400 rounded bg-gray-800 !text-white hover:bg-gray-700 transition">
             Savatga qo‘shish
           </button>
+
           <button className="w-full py-3 border border-gray-400 text-gray-800 rounded hover:bg-gray-100  transition">
             Tanlanganlarga qo‘shish
           </button>

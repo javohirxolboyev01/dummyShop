@@ -5,6 +5,7 @@ import { TbUserExclamation } from "react-icons/tb";
 import { CiSearch } from "react-icons/ci";
 import CartIcon from "../cardIcon/CardIcon";
 import WishIcon from "../wishlistIcon/WishIcon";
+import ActiveLink from "../ActiveLink/ActiveLink";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -22,18 +23,18 @@ const Navbar = () => {
         </div>
 
         <div className="flex flex-wrap justify-center gap-4 sm:gap-6 text-[14px] sm:text-[16px] font-medium">
-          <NavLink to="/" className="hover:text-gray-600">
+          <ActiveLink to="/" className="hover:text-gray-600">
             Home
-          </NavLink>
-          <NavLink to="/shop" className="hover:text-gray-600">
+          </ActiveLink>
+          <ActiveLink to="/shop" className="hover:text-gray-600">
             Shop
-          </NavLink>
-          <NavLink to="/about" className="hover:text-gray-600">
+          </ActiveLink>
+          <ActiveLink to="/about" className="hover:text-gray-600">
             About
-          </NavLink>
-          <NavLink to="/contact" className="hover:text-gray-600">
+          </ActiveLink>
+          <ActiveLink to="/contact" className="hover:text-gray-600">
             Contact
-          </NavLink>
+          </ActiveLink>
         </div>
 
         <div className="flex items-center text-[18px] sm:text-[22px] gap-4 sm:gap-6">
