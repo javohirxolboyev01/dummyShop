@@ -42,17 +42,18 @@ const HomeProduct = ({ data }) => {
                   <span className="cursor-pointer hover:underline">
                     Compare
                   </span>
-                  <button className="absolute top-2 right-2 bg-white p-1 rounded-full text-gray-500 hover:text-red-600 shadow">
+                  <button
+                    onClick={() =>
+                      wishlistItem.some((wish) => wish.id === item.id)
+                        ? dispatch(removeFromWishlist(item))
+                        : dispatch(wishlist(item))
+                    }
+                    className="absolute top-2 right-2 bg-white p-1 rounded-full text-gray-500 hover:text-red-600 shadow"
+                  >
                     {wishlistItem.some((wish) => wish.id === item.id) ? (
-                      <FaHeart
-                        className="text-red-500 text-lg sm:text-xl"
-                        onClick={() => dispatch(removeFromWishlist(item))}
-                      />
+                      <FaHeart className="text-red-500 text-lg sm:text-xl" />
                     ) : (
-                      <CiHeart
-                        className="text-lg sm:text-xl"
-                        onClick={() => dispatch(wishlist(item))}
-                      />
+                      <CiHeart className="text-lg sm:text-xl" />
                     )}
                   </button>
                 </div>
