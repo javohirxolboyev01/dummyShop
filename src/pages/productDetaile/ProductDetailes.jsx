@@ -56,7 +56,7 @@ const ProductDetailes = () => {
           </h1>
 
           <div className="flex items-center gap-2 mt-2">
-            <Rate defaultValue={0} disabled />
+            <Rate defaultValue={5} disabled />
             <span className="text-sm text-gray-500">(5 Customer Review)</span>
           </div>
 
@@ -64,7 +64,7 @@ const ProductDetailes = () => {
             {product.description}
           </p>
 
-          <div className="mt-5 text-2xl font-bold text-blue-700">
+          <div className="mt-5 text-2xl font-bold text-gray-600">
             {product.price.toLocaleString()} $
           </div>
         </div>
