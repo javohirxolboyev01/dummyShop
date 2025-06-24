@@ -25,7 +25,7 @@ const ShopHero = ({ total, currentPage, pageSize = 16, onPageChange }) => {
   return (
     <div className="w-full">
       <div
-        className="h-60 bg-cover bg-center flex flex-col justify-center items-center text-center"
+        className="h-[316px] bg-cover bg-center flex flex-col justify-center items-center text-center"
         style={{ backgroundImage: `url(${HeroShop})` }}
       >
         <h1 className="text-4xl font-bold text-black mb-2">Shop</h1>

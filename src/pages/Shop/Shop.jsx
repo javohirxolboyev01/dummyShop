@@ -1,25 +1,32 @@
+import React from "react";
 import { useProducts } from "@/api/useProducts";
 import FaetureList from "@/components/featureList/FaetureList";
+import Products from "@/components/products/Products";
 import ShopHero from "@/components/ShopHero/ShopHero";
-import Shopping from "@/components/shopProducts/shopProducts";
-import React, { useState } from "react";
+import { Pagination } from "antd";
+
 import { useSearchParams } from "react-router-dom";
 
 const Shop = () => {
-  const { getProducts } = useProducts();
-  // const [currentPage, setCurrentPage] = useState(1);
+  const { getProduct } = useProducts();
+
   const [params, setParams] = useSearchParams();
 
-  const page = params.get("products") || 1;
-  console.log(page);
+  const page = params.get("page") || 1;
+  const pageSize = params.get("pageSize") || 16;
 
-  const { data } = getProducts({
-    limit: 16,
-    skip: 16 * (page - 1),
+  const { data, isLoading } = getProduct({
+    limit: pageSize,
+    skip: pageSize * (page - 1),
   });
 
-  const handlePageChange = (page) => {
-    params.set("products", page);
+  const handleChangePage = (page, pageS) => {
+    if (pageS !== pageSize) {
+      params.set("pageSize", pageS);
+      params.set("page", "1");
+    } else {
+      params.set("page", page);
+    }
     setParams(params);
   };
 
@@ -30,12 +37,19 @@ const Shop = () => {
         currentPage={page}
         onPageChange={(page) => handlePageChange(page)}
       />
-      <Shopping
-        data={data?.data?.products}
-        total={data?.data?.total}
-        currentPage={page}
-        onPageChange={(page) => handlePageChange(page)}
+      <Products
+        data={data?.data?.products }
+        loading={isLoading}
+        count={16}
       />
+      <div className="my-8 flex justify-center">
+        <Pagination
+          current={page}
+          onChange={handleChangePage}
+          total={data?.data?.total}
+          pageSize={pageSize}
+        />
+      </div>
       <FaetureList />
     </div>
   );

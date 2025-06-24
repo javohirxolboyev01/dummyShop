@@ -63,7 +63,7 @@ const Footer = () => {
 
       <div className="mt-12 text-center text-sm text-gray-500">
         <hr className="my-6" />
-        <p>2023 funiro. All rights reserved</p>
+        <p>2025 funiro. All rights reserved</p>
       </div>
     </footer>
   );
