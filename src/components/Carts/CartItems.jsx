@@ -8,7 +8,7 @@ const CartItems = (products) => {
   const { thumbnail, title, price, quantity } = products;
 
   return (
-    <div className="flex items-center justify-between px-4 py-6 border-b">
+    <div className="flex items-center justify-between px-4 py-6">
       <div className="flex items-center gap-6 w-1/3">
         <div className="w-24 h-24 bg-[#F9F1E7] rounded flex items-center justify-center">
           <img
@@ -20,9 +20,7 @@ const CartItems = (products) => {
         <p className="text-gray-600 font-medium">{title}</p>
       </div>
 
-      <div className="w-1/6 text-center text-gray-600">
-        Rs. {price}$
-      </div>
+      <div className="w-1/6 text-center text-gray-600">Rs. {price}$</div>
 
       <div className="w-1/6 flex justify-center items-center">
         <div className="flex border rounded-md overflow-hidden">
