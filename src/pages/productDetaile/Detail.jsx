@@ -2,11 +2,12 @@ import { useProducts } from "@/api/useProducts";
 import Products from "@/components/products/Products";
 import React from "react";
 import Img from "@/assets/noCart/detaile.png";
+import { useNavigate } from "react-router-dom";
 
 const Detail = () => {
   const { getProduct } = useProducts();
   const { data, isLoading } = getProduct({ limit: 4 });
-
+  const navigate = useNavigate();
   return (
     <div className="w-full bg-white py-10">
       <div className="mt-8 mb-10">
@@ -68,7 +69,10 @@ const Detail = () => {
         )}
 
         <div className="flex justify-center mt-10">
-          <button className="px-8 py-3 border border-yellow-600 !text-yellow-600 rounded-full text-base font-semibold hover:bg-yellow-600 hover:!text-white transition duration-200">
+          <button
+            onClick={() => navigate("/")}
+            className="px-8 py-3 border border-yellow-600 !text-yellow-600 rounded-full text-base font-semibold hover:bg-yellow-600 hover:!text-white transition duration-200"
+          >
             Show More
           </button>
         </div>

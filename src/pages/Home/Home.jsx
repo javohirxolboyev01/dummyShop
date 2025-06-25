@@ -5,15 +5,15 @@ import Category2 from "../../assets/category/category2.png";
 import Category3 from "../../assets/category/category3.png";
 import { useProducts } from "@/api/useProducts";
 import Products from "@/components/products/Products";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const { getProduct } = useProducts();
   const { data, isLoading } = getProduct({ limit: 8 });
+  const navigate = useNavigate();
 
   return (
     <div>
-  
-   
       <Hero />
       <section className="py-16 px-4 text-center">
         <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">
@@ -55,6 +55,14 @@ const Home = () => {
         </div>
       </section>
       <Products data={data?.data?.products} loading={isLoading} count={8} />
+      <div className="flex justify-center mt-10">
+        <button
+          onClick={() => navigate("/shop")}
+          className="px-8 py-3 border border-yellow-600 !text-yellow-600 rounded-full text-base font-semibold hover:bg-yellow-600 hover:!text-white transition duration-200"
+        >
+          Show More
+        </button>
+      </div>
     </div>
   );
 };
