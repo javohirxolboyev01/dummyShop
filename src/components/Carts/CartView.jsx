@@ -18,13 +18,38 @@ const CartView = ({ datas }) => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 lg:grid-cols-3 gap-8">
-      <div className="col-span-2">
-        <div className="grid grid-cols-5 bg-[#F9F1E7] px-3 py-3 rounded-t font-bold text-gray-700 text-sm">
-          <p className="col-span-2 text-center">Product</p>
-          <p className="">Price</p>
-          <p className="">Quantity</p>
-          <p className="">Subtotal</p>
+    <div
+      className="
+        max-w-7xl  
+        mx-auto    
+        px-4       
+        py-10      
+        grid       
+        grid-cols-1 
+        lg:grid-cols-3 
+        gap-8      
+      "
+    >
+      <div
+        className="
+          col-span-2  
+        "
+      >
+        <div
+          className="
+            grid       
+            grid-cols-5  
+            bg-[#F9F1E7] 
+            px-3 py-3    
+            rounded-t     
+            font-bold     
+            text-gray-700
+            text-sm      
+          "
+        >
+          <p className="col-span-2 text-center">Product</p> <p>Price</p>
+          <p>Quantity</p>
+          <p>Subtotal</p>
         </div>
 
         {datas.map((product) => (
@@ -32,7 +57,15 @@ const CartView = ({ datas }) => {
         ))}
       </div>
 
-      <CartTotals subtotal={subtotal} />
+      <div
+        className="
+          sticky      
+          top-6        
+          h-fit       
+        "
+      >
+        <CartTotals subtotal={subtotal} />
+      </div>
     </div>
   );
 };
