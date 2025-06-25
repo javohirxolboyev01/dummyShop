@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../redux/features/cartSlice";
-import { wishlist, removeFromWishlist } from "../redux/features/wishlistSlice";
+import { wishlist } from "../redux/features/wishlistSlice";
 import { FaHeart } from "react-icons/fa";
 import { CiHeart } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
@@ -10,8 +10,16 @@ const ProductsItem = (product) => {
   const navigate = useNavigate();
   const { thumbnail, title, price, discountPercentage, shippingInformation } =
     product;
+  const [added, setAdded] = useState(false);
   const dispatch = useDispatch();
   const WhistlistItem = useSelector((state) => state.wishlist.item);
+
+  const handleAddToCart = () => {
+    dispatch(addToCart(product));
+    setAdded(true);
+
+    setTimeout(() => setAdded(false), 2000);
+  };
 
   return (
     <div className="relative bg-white rounded-xl overflow-hidden shadow group">
@@ -24,11 +32,16 @@ const ProductsItem = (product) => {
 
         <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col items-center justify-center space-y-2 text-white">
           <button
-            onClick={() => dispatch(addToCart(product))}
-            className="bg-white text-black text-sm px-4 py-1 rounded-full font-medium hover:bg-gray-200"
+            onClick={handleAddToCart}
+            className={`text-sm px-4 py-1 rounded-full font-medium transition ${
+              added
+                ? "bg-green-500 text-white hover:bg-green-600"
+                : "bg-white !text-black hover:bg-gray-200"
+            }`}
           >
-            Add to cart
+            {added ? "Qo‘shildi" : "Add to cart"}
           </button>
+
           <div className="flex gap-4 text-sm">
             <span className="cursor-pointer hover:underline">Share</span>
             <span className="cursor-pointer hover:underline">Compare</span>

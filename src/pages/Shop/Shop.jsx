@@ -2,10 +2,12 @@ import React from "react";
 import { useProducts } from "@/api/useProducts";
 import FaetureList from "@/components/featureList/FaetureList";
 import Products from "@/components/products/Products";
-import ShopHero from "@/components/ShopHero/ShopHero";
 import { Pagination } from "antd";
+import HeroShop from "@/assets/hero/HeroShop.svg";
 
 import { useSearchParams } from "react-router-dom";
+import Heros from "@/components/ReusableHero/Heros";
+import BottomHero from "@/components/BottomHero/BottomHero";
 
 const Shop = () => {
   const { getProduct } = useProducts();
@@ -32,16 +34,16 @@ const Shop = () => {
 
   return (
     <div>
-      <ShopHero
-        total={data?.data?.total}
-        currentPage={page}
-        onPageChange={(page) => handlePageChange(page)}
+      <Heros
+        title="Shop"
+        breadcrumb={["Home", "Shop"]}
+        linkMap={{ Home: "/", Shop: "/shop" }}
+        backgroundImage={HeroShop}
+        height={300}
       />
-      <Products
-        data={data?.data?.products }
-        loading={isLoading}
-        count={16}
-      />
+      <BottomHero />
+
+      <Products data={data?.data?.products} loading={isLoading} count={16} />
       <div className="my-8 flex justify-center">
         <Pagination
           current={page}

@@ -4,16 +4,16 @@ import ProductsItem from "./ProductsItem";
 const Skeleton = ({ count }) => {
   return (
     <>
-      {/* {Array(count)
+      {Array(count)
         .fill()
-        .map((__, inx) => ( */}
+        .map((__, inx) => (
           <div>
             <div className="h-[285px] bg-gray-100 "></div>
             <div className="w-10/12 bg-gray-100 h-6 mt-2"></div>
             <div className="w-6/12 bg-gray-100 h-6 mt-2"></div>
             <div className="w-1/3 bg-gray-100 h-6 mt-2"></div>
           </div>
-          {/* // ))} */}
+        ))}
     </>
   );
 };

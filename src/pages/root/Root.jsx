@@ -7,7 +7,7 @@ const Home = lazy(() => import("../Home/Home"));
 const Shop = lazy(() => import("../Shop/Shop"));
 const About = lazy(() => import("../About/About"));
 const Wishlist = lazy(() => import("../Wishlist/Wishlist"));
-const CartCheck = lazy(() => import("../cartCheck/CartCheck"));
+const Cart = lazy(() => import("../cartCheck/Cart"));
 const NotFound = lazy(() => import("../NoteFoun/NoteFound"));
 const Contact = lazy(() => import("../Contact/Contact"));
 const Root = () => {
@@ -71,7 +71,7 @@ const Root = () => {
               path: "cart",
               element: (
                 <Suspense>
-                  <CartCheck />
+                  <Cart />
                 </Suspense>
               ),
             },
