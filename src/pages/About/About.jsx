@@ -1,6 +1,7 @@
 import React from "react";
 import HeroShop from "@/assets/hero/HeroShop.svg";
 import Heros from "@/components/ReusableHero/Heros";
+import ActiveLink from "@/components/ActiveLink/ActiveLink";
 
 const About = () => {
   return (

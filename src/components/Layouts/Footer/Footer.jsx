@@ -1,12 +1,13 @@
 import React from "react";
-
+import Logo from "@/assets/logo/Logo2.png";
+import ActiveLink from "@/components/ActiveLink/ActiveLink";
 const Footer = () => {
   return (
     <footer className="bg-white text-black px-8 py-12 border-t mt-5">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
         <div>
-          <h2 className="text-2xl font-bold mb-4">Funiro.</h2>
-          <p className="text-sm text-gray-600">
+          <img src={Logo} alt="Logo" className="w-[120px] h-[25px] " />
+          <p className="text-sm text-gray-600 my-5">
             400 University Drive Suite 200 Coral Gables,
             <br />
             FL 33134 USA
@@ -15,20 +16,12 @@ const Footer = () => {
 
         <div>
           <h3 className="text-md font-semibold mb-4">Links</h3>
-          <ul className="space-y-2 text-sm text-gray-700">
-            <li>
-              <a href="#">Home</a>
-            </li>
-            <li>
-              <a href="#">Shop</a>
-            </li>
-            <li>
-              <a href="#">About</a>
-            </li>
-            <li>
-              <a href="#">Contact</a>
-            </li>
-          </ul>
+          <div className="flex flex-col space-y-2 text-sm text-gray-700">
+            <ActiveLink to="/">Home</ActiveLink>
+            <ActiveLink to="/shop">Shop</ActiveLink>
+            <ActiveLink to="/about">About</ActiveLink>
+            <ActiveLink to="/contact">Contact</ActiveLink>
+          </div>
         </div>
 
         <div>

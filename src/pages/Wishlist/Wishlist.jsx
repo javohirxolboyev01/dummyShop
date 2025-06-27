@@ -4,9 +4,19 @@ import { useSelector } from "react-redux";
 import Heros from "@/components/ReusableHero/Heros";
 import HeroShop from "@/assets/hero/HeroShop.svg";
 
+import EmptyWishlist from "./EmptyWishlist";
+
 const Wishlist = () => {
   const wishlistItem = useSelector((state) => state.wishlist.item);
   console.log(wishlistItem);
+
+  if (wishlistItem.length === 0) {
+    return (
+      <div>
+        <EmptyWishlist />
+      </div>
+    );
+  }
   return (
     <div>
       <Heros

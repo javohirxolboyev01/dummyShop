@@ -1,63 +1,46 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, InC, deC } from "../redux/features/cartSlice";
+import { addToCart, InC, deCFromProduct } from "../redux/features/cartSlice";
 
 const QuantityControl = ({ product }) => {
   const dispatch = useDispatch();
-  const [added, setAdded] = useState(false);
+  const cartItems = useSelector((state) => state.cart.cart || []);
 
-  const item = useSelector((state) =>
-    state.cart.cart.find((i) => i.id === product.id)
-  );
-  const quantity = item?.quantity || 0;
+  const cartItem = cartItems.find((item) => item.id === product.id);
 
-  const handleAddToCart = () => {
-    dispatch(addToCart(product));
-    setAdded(true);
-    setTimeout(() => setAdded(false), 2000);
-  };
+  const handleAddToCart = () => dispatch(addToCart(product));
+  const handleInC = () => dispatch(InC(product.id));
+  const handleDeC = () => dispatch(deCFromProduct(product.id));
 
   return (
-      <div>
-
-      <div className="flex items-center flex-wrap gap-3 mt-5 ">
-        <button
-          onClick={() => dispatch(deC(product))}
-          disabled={quantity <= 1}
-          className="w-9 h-9 rounded border text-xl font-semibold disabled:opacity-40 transition hover:bg-gray-100"
-          >
-          −
-        </button>
-
-        <span className="text-lg font-semibold w-8 text-center">
-          {quantity}
-        </span>
-
-        <button
-          onClick={() => dispatch(InC(product))}
-          className="w-9 h-9 rounded border text-xl font-semibold transition hover:bg-gray-100 "
-          >
-          +
-        </button>
-
-        <button
-          onClick={handleAddToCart}
-          className={`text-sm px-8 py-4  rounded-full font-medium transition  ${
-            added
-            ? "bg-green-500 text-white hover:bg-green-600"
-            : "bg-gray-800 !text-white hover:bg-gray-700"
-          }`}
-          >
-          {added ? "Qo‘shildi" : "Add to cart"}
-        </button>
-      </div>
-    
+    <div>
+      <div className="px-4 pb-4 pt-2  rounded-b-2xl">
+        {cartItem ? (
+          <div className="w-[200px] h-[40px] bg-gray-300 rounded-full flex items-center justify-center gap-4 text-black">
+            <button
+              onClick={handleDeC}
+              className="w-7 h-7 cursor-pointer rounded-full flex items-center justify-center text-base font-bold hover:bg-gray-200 hover:!text-black transition"
+            >
+              −
+            </button>
+            <span className="text-sm font-semibold">{cartItem.quantity}</span>
+            <button
+              onClick={handleInC}
+              className="w-7 h-7 cursor-pointer rounded-full flex items-center justify-center text-base font-bold hover:bg-gray-200 hover:!text-black transition"
+            >
+              +
+            </button>
           </div>
-          
-    
-   
-    
+        ) : (
+          <button
+            onClick={handleAddToCart}
+            className="bg-[#F4B400] !text-black w-[200px] h-[40px] py-2 rounded-full text-sm font-medium cursor-pointer"
+          >
+            Add to cart
+          </button>
+        )}
+      </div>
+    </div>
   );
 };
-
 export default QuantityControl;

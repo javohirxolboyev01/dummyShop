@@ -27,8 +27,8 @@ const ProductInfo = ({ product }) => {
             <button
               key={size}
               onClick={() => setSelectedSize(size)}
-              className={`px-3 py-1 border rounded text-sm hover:bg-gray-100 ${
-                selectedSize === size ? "border-gray-800 font-semibold" : ""
+              className={`px-3 py-1 border rounded  text-sm hover:bg-gray-100 ${
+                selectedSize === size ? "border-gray-800 font-semibold " : ""
               }`}
             >
               {size}

@@ -1,21 +1,12 @@
 import React from "react";
 import CartItems from "./CartItems";
 import CartTotals from "./CartTotals.jsx";
-import EmptyCartWithProducts from "./EmptyCartWithProducts";
 
 const CartView = ({ datas }) => {
   const subtotal = datas.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0
   );
-
-  if (datas.length === 0) {
-    return (
-      <div>
-        <EmptyCartWithProducts />
-      </div>
-    );
-  }
 
   return (
     <div
@@ -47,7 +38,8 @@ const CartView = ({ datas }) => {
             text-sm      
           "
         >
-          <p className="col-span-2 text-center">Product</p> <p>Price</p>
+          <p className="col-span-2 text-center">Product</p>
+          <p>Price</p>
           <p>Quantity</p>
           <p>Subtotal</p>
         </div>

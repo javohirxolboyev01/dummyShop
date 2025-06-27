@@ -1,53 +1,56 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { deC, InC, removeFromCart } from "../redux/features/cartSlice";
+import { deCFromCart, InC, removeFromCart } from "../redux/features/cartSlice";
 import { FiTrash2 } from "react-icons/fi";
 
-const CartItems = (products) => {
+const CartItems = ({ id, thumbnail, title, price, quantity }) => {
   const dispatch = useDispatch();
-  const { thumbnail, title, price, quantity } = products;
 
   return (
-    <div className="flex items-center justify-between px-4 py-6">
-      <div className="flex items-center gap-6 w-1/3">
-        <div className="w-24 h-24 bg-[#F9F1E7] rounded flex items-center justify-center">
+    <div className="flex items-center justify-between px-4 py-4 ">
+      <div className="flex items-center gap-4 w-1/3">
+        <div className="w-20 h-20 bg-[#F9F1E7] flex items-center justify-center rounded">
           <img
             src={thumbnail}
             alt={title}
-            className="object-contain w-full h-full p-2"
+            className="w-[70px] h-[70px] object-contain"
           />
         </div>
-        <p className="text-gray-600 font-medium">{title}</p>
+        <p className="text-gray-700 font-medium text-sm line-clamp-2 leading-snug">
+          {title}
+        </p>
       </div>
 
-      <div className="w-1/6 text-center text-gray-600">Rs. {price}$</div>
+      <div className="w-1/6 text-center text-gray-700 text-sm">
+        {price.toLocaleString()}$
+      </div>
 
-      <div className="w-1/6 flex justify-center items-center">
+      <div className="w-1/6 flex justify-center">
         <div className="flex border rounded-md overflow-hidden">
           <button
-            className="px-3 py-1 text-lg text-gray-500 disabled:opacity-30"
-            onClick={() => dispatch(deC(products))}
+            className="px-3 py-1 text-lg text-gray-600 disabled:opacity-30 cursor-pointer"
+            onClick={() => dispatch(deCFromCart(id))}
             disabled={quantity <= 1}
           >
-            -
+            −
           </button>
-          <span className="px-4 py-1 text-center">{quantity}</span>
+          <span className="px-4 py-1">{quantity}</span>
           <button
-            className="px-3 py-1 text-lg text-gray-700"
-            onClick={() => dispatch(InC(products))}
+            className="px-3 py-1 text-lg text-gray-800 cursor-pointer"
+            onClick={() => dispatch(InC(id))}
           >
             +
           </button>
         </div>
       </div>
 
-      <div className="w-1/6 text-center font-medium">
-        Rs. {(price * quantity).toLocaleString()}
+      <div className="w-1/6 text-center font-medium text-gray-800 text-sm">
+        {(price * quantity).toLocaleString()}$
       </div>
 
       <div
         className="w-1/12 text-center text-[#B88E2F] text-xl cursor-pointer"
-        onClick={() => dispatch(removeFromCart(products))}
+        onClick={() => dispatch(removeFromCart({ id }))}
       >
         <FiTrash2 />
       </div>

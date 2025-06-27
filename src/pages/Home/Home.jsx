@@ -9,7 +9,9 @@ import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const { getProduct } = useProducts();
-  const { data, isLoading } = getProduct({ limit: 8 });
+  const { data, isLoading } = getProduct();
+  const slicedData = data?.data?.products.slice(8, 16);
+
   const navigate = useNavigate();
 
   return (
@@ -54,11 +56,14 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <Products data={data?.data?.products} loading={isLoading} count={8} />
+      <Products data={slicedData} loading={isLoading} count={8} />
       <div className="flex justify-center mt-10">
         <button
-          onClick={() => navigate("/shop")}
-          className="px-8 py-3 border border-yellow-600 !text-yellow-600 rounded-full text-base font-semibold hover:bg-yellow-600 hover:!text-white transition duration-200"
+          onClick={() => {
+            navigate("/shop");
+            window.scrollTo(0, 0);
+          }}
+          className="px-8 py-3 border border-[#F4B400] !text-[#F4B400] rounded-full text-base font-semibold hover:bg-[#F4B400] hover:!text-white transition duration-200"
         >
           Show More
         </button>

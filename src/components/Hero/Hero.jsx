@@ -1,8 +1,10 @@
 import React from "react";
 import HeroImg from "@/assets/hero/Hero.png";
 import { Button } from "antd";
+import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
+  const navigate = useNavigate();
   return (
     <div
       className="relative min-h-[710px] bg-cover bg-center text-white flex items-center"
@@ -22,7 +24,7 @@ const Hero = () => {
           </p>
 
           <p
-            className="text-[#B88E2F] mb-[17px] font-Pb leading-[65px] text-[52px]
+            className="text-[#F4B400] mb-[17px] font-Pb leading-[65px] text-[52px]
             max-[1024px]:text-[42px]
             max-[768px]:text-[32px]
             max-[480px]:text-[24px] max-[480px]:leading-[38px]"
@@ -43,15 +45,16 @@ const Hero = () => {
           </p>
 
           <Button
+            onClick={() => navigate("/shop")}
             type="primary"
-            className="transition-all duration-300 hover:!bg-[#946d1e] hover:!border-[#946d1e]
+            className="transition-all duration-300 
             text-[16px] font-semibold w-[300px]
             max-[1024px]:w-[250px]
             max-[768px]:w-[200px]
             max-[480px]:w-full"
             style={{
-              backgroundColor: "#B88E2F",
-              borderColor: "#B88E2F",
+              backgroundColor: "#F4B400",
+              borderColor: "#F4B400",
               color: "white",
               paddingTop: "16px",
               paddingBottom: "16px",
@@ -65,4 +68,4 @@ const Hero = () => {
   );
 };
 
-export default Hero;
+export default React.memo(Hero);

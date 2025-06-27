@@ -8,6 +8,7 @@ import HeroShop from "@/assets/hero/HeroShop.svg";
 import { useSearchParams } from "react-router-dom";
 import Heros from "@/components/ReusableHero/Heros";
 import BottomHero from "@/components/BottomHero/BottomHero";
+import ScrollToTop from "@/components/ScrollTop/ScrollTop";
 
 const Shop = () => {
   const { getProduct } = useProducts();
@@ -30,6 +31,7 @@ const Shop = () => {
       params.set("page", page);
     }
     setParams(params);
+    window.scrollTo(0, 0);
   };
 
   return (
@@ -57,4 +59,4 @@ const Shop = () => {
   );
 };
 
-export default Shop;
+export default React.memo(Shop);

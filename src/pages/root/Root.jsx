@@ -1,6 +1,7 @@
 import React, { lazy } from "react";
 import { Suspense } from "../../../utilist";
 import { useRoutes } from "react-router-dom";
+import ScrollToTop from "@/components/ScrollTop/ScrollTop";
 const ProductDetailes = lazy(() => import("../productDetaile/ProductDetailes"));
 const Layout = lazy(() => import("@/components/Layout/Layout"));
 const Home = lazy(() => import("../Home/Home"));
@@ -10,9 +11,11 @@ const Wishlist = lazy(() => import("../Wishlist/Wishlist"));
 const Cart = lazy(() => import("../cartCheck/Cart"));
 const NotFound = lazy(() => import("../NoteFoun/NoteFound"));
 const Contact = lazy(() => import("../Contact/Contact"));
+const Checkout = lazy(() => import("../Checkout/Checkout"));
 const Root = () => {
   return (
     <>
+      <ScrollToTop />
       {useRoutes([
         {
           path: "/",
@@ -52,7 +55,7 @@ const Root = () => {
               ),
             },
             {
-              path: "product/:id",
+              path: "/product/:id",
               element: (
                 <Suspense>
                   <ProductDetailes />
@@ -60,7 +63,7 @@ const Root = () => {
               ),
             },
             {
-              path: "wishlist",
+              path: "/wishlist",
               element: (
                 <Suspense>
                   <Wishlist />
@@ -68,10 +71,18 @@ const Root = () => {
               ),
             },
             {
-              path: "cart",
+              path: "/cart",
               element: (
                 <Suspense>
                   <Cart />
+                </Suspense>
+              ),
+            },
+            {
+              path: "chek",
+              element: (
+                <Suspense>
+                  <Checkout />
                 </Suspense>
               ),
             },

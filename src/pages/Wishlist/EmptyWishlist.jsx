@@ -1,12 +1,12 @@
 import React from "react";
-import EmptyWish from "@/assets/logo/emptyC.jpg";
+import EmptyWish from "@/assets/logo/wish.png";
 import { IoIosArrowBack } from "react-icons/io";
 import { Button } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useProducts } from "@/api/useProducts";
 import Products from "@/components/products/Products";
 
-const EmptyCartWithProducts = () => {
+const EmptyWishlist = () => {
   const navigate = useNavigate();
   const { getProduct } = useProducts();
   const { data } = getProduct({ limit: 4 });
@@ -16,13 +16,12 @@ const EmptyCartWithProducts = () => {
         <img
           src={EmptyWish}
           alt="Savatcha bo‘sh"
-          className="w-60 h-60 object-contain mb-6 rounded-full "
+          className="w-60 h-60 object-contain mb-6 rounded-full bg-[#f4b400]"
         />
         <p className="text-lg font-bold">Yoqqan mahsulotlarni qo‘shing</p>
         <p className="text-sm mt-1">
-          Mahsulot past qismidagi{" "}
-          <span className="text-[#f4b400]">Add to cart</span> tugmasini bosing.
-          Akkauntga kirsangiz, tanlanganlar saqlanadi.
+          Mahsulot yonidagi <span className="text-[#f4b400]">♡</span> tugmasini
+          bosing. Akkauntga kirsangiz, tanlanganlar saqlanadi.
         </p>
         <Button
           style={{
@@ -30,11 +29,11 @@ const EmptyCartWithProducts = () => {
             borderColor: "#F4B400",
             color: "white",
           }}
-          onClick={() => navigate("/shop")}
+          onClick={() => navigate("/")}
           type="primary"
           className="my-6 mb-20 "
         >
-          <IoIosArrowBack /> Xarid qilish
+          <IoIosArrowBack /> Bosh sahifa
         </Button>
       </div>
       <div className="container mx-auto px-4 my-8">
@@ -48,4 +47,4 @@ const EmptyCartWithProducts = () => {
   );
 };
 
-export default EmptyCartWithProducts;
+export default EmptyWishlist;

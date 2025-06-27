@@ -21,11 +21,11 @@ const Heros = ({
         <div className="absolute inset-0 bg-black/10" />
 
         <div className="relative z-10 text-center">
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-600 mb-3">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black mb-3">
             {title}
           </h1>
 
-          <div className="flex justify-center items-center gap-2 text-sm text-gray-600">
+          <div className="flex justify-center items-center gap-2 text-sm text-gray-800">
             {breadcrumb.map((crumb, index) => (
               <span key={crumb} className="flex items-center gap-2">
                 <NavLink

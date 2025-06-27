@@ -7,11 +7,11 @@ const BottomHero = () => {
       <div className="bg-[#F9F1E7] w-full py-6 shadow mb-6">
         <div className="max-w-screen-xl mx-auto px-4">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <p className="text-sm text-gray-600">Showing – of results</p>
+            <p className="text-sm text-gray-800">Showing – of results</p>
 
             <div className="flex items-center gap-4 flex-wrap">
               <div className="flex items-center gap-2">
-                <span className="text-sm text-gray-600">Show</span>
+                <span className="text-sm text-gray-800">Show</span>
                 <Select style={{ width: 80 }} size="small">
                   <Option value={8}>8</Option>
                   <Option value={16}>16</Option>
@@ -33,7 +33,6 @@ const BottomHero = () => {
           </div>
         </div>
       </div>
-      s
     </div>
   );
 };

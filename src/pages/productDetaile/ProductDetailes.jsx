@@ -14,7 +14,7 @@ const ProductDetails = () => {
   const [selectedImage, setSelectedImage] = useState(0);
   const { data, isLoading, error } = getProductt(id);
 
-  if (isLoading) return <p className="text-center py-12">Yuklanmoqda...</p>;
+  if (isLoading) return <p className="text-center py-12"></p>;
   if (error)
     return <p className="text-center text-red-500 py-12">Xatolik yuz berdi</p>;
 
@@ -41,4 +41,4 @@ const ProductDetails = () => {
   );
 };
 
-export default ProductDetails;
+export default React.memo(ProductDetails);

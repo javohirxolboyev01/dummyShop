@@ -3,6 +3,7 @@ import Products from "@/components/products/Products";
 import React from "react";
 import Img from "@/assets/noCart/detaile.png";
 import { useNavigate } from "react-router-dom";
+import Swipper from "@/components/Swipper/Swipper";
 
 const Detail = () => {
   const { getProduct } = useProducts();
@@ -12,10 +13,8 @@ const Detail = () => {
     <div className="w-full bg-white py-10">
       <div className="mt-8 mb-10">
         <div className="max-w-5xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Chap taraf – hech narsa yo‘q, lekin joy bor */}
           <div className="h-[300px]"></div>
 
-          {/* O‘ng taraf – ma’lumotlar */}
           <div className="border-t border-gray-200 pt-6 text-sm text-gray-700 space-y-4 w-full">
             <div className="flex justify-between">
               <span className="font-medium text-gray-600">SKU:</span>
@@ -46,18 +45,14 @@ const Detail = () => {
                 </button>
               </div>
             </div>
+            <hr />
           </div>
         </div>
       </div>
-
       <div className="max-w-7xl mx-auto px-4">
-        <div className="my-10">
-          <img
-            className="w-full h-[300px] sm:h-[400px] md:h-[550px] lg:h-[650px] xl:h-[744px] max-w-[1440px] object-cover mx-auto mb-8"
-            src={Img}
-            alt="Rasm"
-          />
-          <h2 className="text-2xl md:text-3xl font-semibold text-center text-gray-800  ">
+        <Swipper />
+        <div className="my-8">
+          <h2 className="text-2xl md:text-3xl font-semibold text-center text-gray-800   ">
             Related Products
           </h2>
         </div>
@@ -70,7 +65,7 @@ const Detail = () => {
 
         <div className="flex justify-center mt-10">
           <button
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/shop")}
             className="px-8 py-3 border border-yellow-600 !text-yellow-600 rounded-full text-base font-semibold hover:bg-yellow-600 hover:!text-white transition duration-200"
           >
             Show More
