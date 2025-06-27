@@ -11,6 +11,7 @@ const Cart = () => {
   console.log(cartItem);
 
   if (cartItem.length === 0) {
+    window.scrollTo(0, 0);
     return (
       <div>
         <EmptyCartWithProducts />

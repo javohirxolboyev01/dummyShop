@@ -11,6 +11,7 @@ const Wishlist = () => {
   console.log(wishlistItem);
 
   if (wishlistItem.length === 0) {
+    window.scrollTo(0, 0);
     return (
       <div>
         <EmptyWishlist />
