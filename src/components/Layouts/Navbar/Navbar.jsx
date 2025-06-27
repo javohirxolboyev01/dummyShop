@@ -15,7 +15,7 @@ const Navbar = () => {
   const { getSearch } = useProducts();
   const [value, setValue] = useState("");
   const text = useDebounce(value);
-  const { data } = getSearch({ q: text.trim() });
+  const { data } = getSearch({ q: text.trim(), limit: 10 });
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {

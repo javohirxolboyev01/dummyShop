@@ -1,5 +1,5 @@
 import React, { lazy } from "react";
-import { Suspense } from "../../../utilist";
+import { Suspense } from "@/utilist/index";
 import { useRoutes } from "react-router-dom";
 import ScrollToTop from "@/components/ScrollTop/ScrollTop";
 const ProductDetailes = lazy(() => import("../productDetaile/ProductDetailes"));
