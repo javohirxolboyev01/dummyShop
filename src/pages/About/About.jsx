@@ -12,6 +12,7 @@ const About = () => {
         linkMap={{ Home: "/", About: "/about" }}
         backgroundImage={HeroShop}
       />
+      <h1>About malumotlari boladi</h1>
     </div>
   );
 };
