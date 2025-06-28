@@ -30,7 +30,7 @@ const CheckoutPage = () => {
 
   const handleOrder = async () => {
     if (!userInfo?.name || !userInfo?.tel) {
-      return message.warning("Iltimos, foydalanuvchi ma'lumotlarini kiriting!");
+      return message.warning("Iltimos, user ma'lumotlarini kiriting!");
     }
 
     let text = `📦 *Yangi Buyurtma* %0A%0A`;
@@ -66,14 +66,14 @@ const CheckoutPage = () => {
     <div className="max-w-6xl mx-auto p-6 bg-white rounded-md shadow-md mt-10">
       <Row gutter={[32, 32]}>
         <Col xs={24} md={14}>
-          <Typography.Title level={3}>Billing details</Typography.Title>
+          <Typography.Title level={3}>To'lov usuli</Typography.Title>
           <UserInput />
           <LocationSelector />
         </Col>
 
         <Col xs={24} md={10}>
           <div className="border p-4 rounded-md space-y-4">
-            <Typography.Title level={5}>Your Order</Typography.Title>
+            <Typography.Title level={5}>Sizning buyurtmangiz</Typography.Title>
 
             <Divider />
 
@@ -82,7 +82,7 @@ const CheckoutPage = () => {
                 <div>
                   <p>{item.title}</p>
                   <p className="text-xs text-gray-500">
-                    Quantity: {item.quantity}
+                    Buyurtma soni: {item.quantity}
                   </p>
                 </div>
                 <p>{(item.price * item.quantity).toLocaleString()} $</p>
@@ -92,7 +92,7 @@ const CheckoutPage = () => {
             <Divider />
 
             <div className="flex justify-between font-semibold text-base">
-              <span>Total</span>
+              <span>Jami:</span>
               <span>{total.toLocaleString()} $</span>
             </div>
 
@@ -107,7 +107,7 @@ const CheckoutPage = () => {
                 className="rounded-full"
                 style={{ backgroundColor: "#f4b400", borderColor: "#f4b400" }}
               >
-                Place Order
+                Buyurtma qilish
               </Button>
             </Space>
           </div>

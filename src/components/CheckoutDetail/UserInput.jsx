@@ -51,7 +51,7 @@ const UserInput = () => {
       </div>
 
       <Modal
-        title="Foydalanuvchi ma’lumotlari"
+        title="Userning ma’lumotlari"
         open={isModalOpen}
         footer={null}
         onCancel={handleCancel}
@@ -63,7 +63,7 @@ const UserInput = () => {
             name="name"
             rules={[{ required: true, message: "Ismingizni kiriting" }]}
           >
-            <Input placeholder="Masalan: Javohir" />
+            <Input placeholder="Masalan: Abdullajon" />
           </Form.Item>
 
           <Form.Item

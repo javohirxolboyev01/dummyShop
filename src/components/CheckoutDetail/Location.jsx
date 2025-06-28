@@ -2,10 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Modal, Space, Typography, Input, Form } from "antd";
 import { GrLocationPin } from "react-icons/gr";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  setLocation as saveToCart,
-  clearLocation,
-} from "../redux/features/cartSlice";
+import { setLocation as saveToCart } from "../redux/features/cartSlice";
 import MapModal from "../Maps/MapModal";
 
 const LocationSelector = () => {
@@ -16,7 +13,6 @@ const LocationSelector = () => {
   const mapLocation = useSelector((state) => state.selectedLocation.location);
   const savedLocation = useSelector((state) => state.cart.location);
 
-  // Xaritada marker tanlansa, inputga yozish
   useEffect(() => {
     if (isModalOpen && mapLocation?.label) {
       form.setFieldsValue({ location: mapLocation.label });
@@ -65,7 +61,7 @@ const LocationSelector = () => {
             name="location"
             rules={[{ required: true, message: "Manzilni kiriting" }]}
           >
-            <Input placeholder="Xaritadan tanlagan manzil avtomatik chiqadi" />
+            <Input placeholder="Xaritadan manzilingizni tanlasangiz bo'ladi" />
           </Form.Item>
 
           <Form.Item>
