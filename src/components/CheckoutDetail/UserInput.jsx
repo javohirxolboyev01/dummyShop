@@ -1,22 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Modal, Space, Typography, Input, Form } from "antd";
 import { CiUser } from "react-icons/ci";
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { clearCart } from "../redux/features/cartSlice";
-
-const BOT_TOKEN = "7969214523:AAHRqI5_8q979YIfkxFyg1GZ3lPA0OtQ5mQ";
-const USER_ID = "6333791578";
+import { setUserInfo } from "../redux/features/userSlice";
 
 const UserInput = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [form] = Form.useForm();
-  const cartItems = useSelector((state) => state.cart.cart);
   const dispatch = useDispatch();
-
-  //   const [selectedlocation, setSelectedlocation] = useState("");
-  //   const [selectedName, setSelectedName] = useState("");
-  //   const [selectedPhone, setSelectedPhone] = useState("");
+  const user = useSelector((state) => state.user);
 
   const showModal = () => setIsModalOpen(true);
   const handleCancel = () => {
@@ -24,36 +16,16 @@ const UserInput = () => {
     setIsModalOpen(false);
   };
 
-  const handleFinish = (values) => {
-    let text = "";
-    text += `📦 Buyurtma %0A%0A`;
-    text += `🤵 Nomi: ${values.name} %0A`;
-    text += `📍 Manzil: ${values.address} %0A`;
-    text += `📞 Tel: ${values.tel} %0A%0A`;
-
-    cartItems.forEach((product, i) => {
-      text += `🛒 ${i + 1}) ${product.title} %0A`;
-      text += `Mahsulot soni: ${product.quantity} %0A`;
-      text += `Narxi: ${product.price} $ %0A%0A`;
+  useEffect(() => {
+    form.setFieldsValue({
+      name: user.name,
+      tel: user.tel,
     });
+  }, [user, form]);
 
-    const total = cartItems.reduce(
-      (sum, item) => sum + item.price * item.quantity,
-      0
-    );
-
-    text += `🧾 Jami: ${total.toLocaleString()} $`;
-
-    axios
-      .get(
-        `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${USER_ID}&text=${text}`
-      )
-      .then((res) => {
-        dispatch(clearCart());
-      });
-
+  const handleFinish = (values) => {
+    dispatch(setUserInfo(values));
     setIsModalOpen(false);
-    form.resetFields();
   };
 
   return (
@@ -63,53 +35,46 @@ const UserInput = () => {
           <span className="text-xl">
             <CiUser />
           </span>
-          <Typography.Text>User ma'lumoti kiritilmagan!</Typography.Text>
+          <Typography.Text>
+            {user.name ? `${user.name} (${user.tel})` : "Ma’lumot kiritilmagan"}
+          </Typography.Text>
         </Space>
 
         <Button
+          style={{ color: "#f4b400" }}
           type="link"
           onClick={showModal}
-          className="font-medium p-0 mt-2"
-          style={{ color: "#f4b400" }}
+          className="font-medium p-0 mt-2 text-[#f4b400]"
         >
           Ma’lumot kiritish
         </Button>
       </div>
 
       <Modal
-        title="Yetkazib berish ma'lumotini kiriting"
+        title="Foydalanuvchi ma’lumotlari"
         open={isModalOpen}
         footer={null}
         onCancel={handleCancel}
-        destroyOnHidden
+        destroyOnClose
       >
-        <Form
-          form={form}
-          layout="vertical"
-          onFinish={handleFinish}
-          autoComplete="off"
-        >
-          <Form.Item
-            label="Yetkazib berish manzili"
-            name="address"
-            rules={[{ required: true, message: "Manzilni kiriting" }]}
-          >
-            <Input placeholder="Masalan: Toshkent, Yangi hayot tuman" />
-          </Form.Item>
-
+        <Form form={form} layout="vertical" onFinish={handleFinish}>
           <Form.Item
             label="Ism"
             name="name"
             rules={[{ required: true, message: "Ismingizni kiriting" }]}
           >
-            <Input placeholder="Masalan: Abdullajon" />
+            <Input placeholder="Masalan: Javohir" />
           </Form.Item>
 
           <Form.Item
             label="Telefon raqami"
             name="tel"
             rules={[
-              { required: true, message: "Telefon raqamingizni kiriting" },
+              { required: true, message: "Telefon raqam kiriting" },
+              {
+                pattern: /^\+998\s?\d{2}\s?\d{3}\s?\d{2}\s?\d{2}$/,
+                message: "Format: +998 90 123 45 67",
+              },
             ]}
           >
             <Input placeholder="+998 90 123 45 67" />

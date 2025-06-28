@@ -1,46 +1,120 @@
-import React from "react";
-import LocationSelector from "../../components/CheckoutDetail/Location";
+import React, { useState } from "react";
+import { Col, Row, Typography, Divider, Button, Space, message } from "antd";
+import LocationSelector from "@/components/CheckoutDetail/Location";
 import UserInput from "@/components/CheckoutDetail/UserInput";
-import Order from "@/components/CheckoutDetail/Order";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { clearCart } from "@/components/redux/features/cartSlice";
+import axios from "axios";
 import { Navigate } from "react-router-dom";
+import { clearUser } from "@/components/redux/features/userSlice";
+import { clearLocation } from "@/components/redux/features/cartSlice";
 
-const Checkout = () => {
+const BOT_TOKEN = "7969214523:AAHRqI5_8q979YIfkxFyg1GZ3lPA0OtQ5mQ";
+const USER_ID = "6333791578";
+
+const CheckoutPage = () => {
   const cartItems = useSelector((state) => state.cart.cart);
+  const userInfo = useSelector((state) => state.user); // ✅ to‘g‘rilandi
+  const location = useSelector((state) => state.cart.location); // ✅ manzil cartSlice ichida
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
+
+  const total = cartItems.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
+
   if (!cartItems.length) {
     return <Navigate replace to={"/cart"} />;
   }
+
+  const handleOrder = async () => {
+    if (!userInfo?.name || !userInfo?.tel) {
+      return message.warning("Iltimos, foydalanuvchi ma'lumotlarini kiriting!");
+    }
+
+    let text = `📦 *Yangi Buyurtma* %0A%0A`;
+    text += `👤 Ism: ${userInfo.name} %0A %0A`;
+    text += `📍 Manzil: ${location || "Tanlanmagan"} %0A`;
+    text += `📞 Tel: ${userInfo.tel} %0A%0A`;
+
+    cartItems.forEach((product, i) => {
+      text += `🛒 ${i + 1}) ${product.title} %0A`;
+      text += `Soni: ${product.quantity} %0A`;
+      text += `Narxi: ${product.price} $ %0A%0A`;
+    });
+
+    text += `🧾 *Jami:* ${total.toLocaleString()} $`;
+
+    setLoading(true);
+    try {
+      await axios.get(
+        `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${USER_ID}&text=${text}&parse_mode=Markdown`
+      );
+      message.success("Buyurtma muvaffaqiyatli yuborildi!");
+      dispatch(clearCart());
+      dispatch(clearUser());
+      dispatch(clearLocation());
+    } catch (err) {
+      message.error("Xatolik yuz berdi, qayta urinib ko‘ring!");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <div className="bg-gray-50 min-h-screen p-6">
-      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="md:col-span-2 space-y-4">
-          <div className="bg-white p-5 rounded-md shadow">
-            <h2 className="text-lg font-semibold mb-3">Buyurtma qilish</h2>
-            <div className="flex items-center gap-4">
-              <button className="px-4 py-2 border rounded-md border-gray-300 bg-gray-100 text-sm text-[#f4b400] font-medium">
-                Olib ketish <br /> bepul
-              </button>
-              <button className="px-4 py-2 border rounded-md border-gray-300 text-sm text-gray-500">
-                Kuryer orqali <br /> 30 $
-              </button>
+    <div className="max-w-6xl mx-auto p-6 bg-white rounded-md shadow-md mt-10">
+      <Row gutter={[32, 32]}>
+        <Col xs={24} md={14}>
+          <Typography.Title level={3}>Billing details</Typography.Title>
+          <UserInput />
+          <LocationSelector />
+        </Col>
+
+        <Col xs={24} md={10}>
+          <div className="border p-4 rounded-md space-y-4">
+            <Typography.Title level={5}>Your Order</Typography.Title>
+
+            <Divider />
+
+            {cartItems.map((item, index) => (
+              <div key={index} className="flex justify-between text-sm">
+                <div>
+                  <p>{item.title}</p>
+                  <p className="text-xs text-gray-500">
+                    Quantity: {item.quantity}
+                  </p>
+                </div>
+                <p>{(item.price * item.quantity).toLocaleString()} $</p>
+              </div>
+            ))}
+
+            <Divider />
+
+            <div className="flex justify-between font-semibold text-base">
+              <span>Total</span>
+              <span>{total.toLocaleString()} $</span>
             </div>
 
-            <LocationSelector />
+            <Divider />
 
-            <UserInput />
-
-            <div className="mt-6 text-sm text-gray-700">
-              <p>
-                <strong>28 июня</strong>
-              </p>
-            </div>
+            <Space direction="vertical" className="w-full">
+              <Button
+                type="primary"
+                block
+                loading={loading}
+                onClick={handleOrder}
+                className="rounded-full"
+                style={{ backgroundColor: "#f4b400", borderColor: "#f4b400" }}
+              >
+                Place Order
+              </Button>
+            </Space>
           </div>
-        </div>
-
-        <Order data={cartItems} />
-      </div>
+        </Col>
+      </Row>
     </div>
   );
 };
 
-export default React.memo(Checkout);
+export default CheckoutPage;

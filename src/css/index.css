@@ -1,7 +1,8 @@
 @import "tailwindcss";
 
+@import "leaflet/dist/leaflet.css";
+
 .container {
   max-width: 1236px;
   width: 100%;
 }
-

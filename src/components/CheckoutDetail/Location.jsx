@@ -1,13 +1,35 @@
-import React, { useState } from "react";
-import { Button, Modal, Space, Typography } from "antd";
+import React, { useEffect, useState } from "react";
+import { Button, Modal, Space, Typography, Input, Form } from "antd";
 import { GrLocationPin } from "react-icons/gr";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setLocation as saveToCart,
+  clearLocation,
+} from "../redux/features/cartSlice";
+import MapModal from "../Maps/MapModal";
 
 const LocationSelector = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [form] = Form.useForm();
+  const dispatch = useDispatch();
+
+  const mapLocation = useSelector((state) => state.selectedLocation.location);
+  const savedLocation = useSelector((state) => state.cart.location);
+
+  // Xaritada marker tanlansa, inputga yozish
+  useEffect(() => {
+    if (isModalOpen && mapLocation?.label) {
+      form.setFieldsValue({ location: mapLocation.label });
+    }
+  }, [mapLocation, isModalOpen]);
 
   const showModal = () => setIsModalOpen(true);
-  const handleOk = () => setIsModalOpen(false);
   const handleCancel = () => setIsModalOpen(false);
+
+  const handleFinish = (values) => {
+    dispatch(saveToCart(values.location));
+    setIsModalOpen(false);
+  };
 
   return (
     <>
@@ -16,7 +38,9 @@ const LocationSelector = () => {
           <span className="text-xl">
             <GrLocationPin />
           </span>
-          <Typography.Text>Yetkazib berish manzili tanlanmagan</Typography.Text>
+          <Typography.Text>
+            {savedLocation || "Yetkazib berish manzili tanlanmagan"}
+          </Typography.Text>
         </Space>
 
         <Button
@@ -32,13 +56,34 @@ const LocationSelector = () => {
       <Modal
         title="Yetkazib berish manzilini tanlang"
         open={isModalOpen}
-        onOk={handleOk}
+        footer={null}
         onCancel={handleCancel}
-        okText="Tanlash"
-        cancelText="Bekor qilish"
       >
-        <p>Bu yerda Joylashgan manzil xarita bo‘ladi.</p>
-        <p>Masalan: Toshkent, Chilonzor - Najot ta'lim</p>
+        <Form form={form} layout="vertical" onFinish={handleFinish}>
+          <Form.Item
+            label="Joylashuv"
+            name="location"
+            rules={[{ required: true, message: "Manzilni kiriting" }]}
+          >
+            <Input placeholder="Xaritadan tanlagan manzil avtomatik chiqadi" />
+          </Form.Item>
+
+          <Form.Item>
+            <Button
+              type="primary"
+              htmlType="submit"
+              className="w-full rounded-full"
+              style={{
+                backgroundColor: "#f4b400",
+                borderColor: "#f4b400",
+                color: "white",
+              }}
+            >
+              Saqlash
+            </Button>
+            <MapModal />
+          </Form.Item>
+        </Form>
       </Modal>
     </>
   );

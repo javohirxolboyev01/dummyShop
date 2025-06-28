@@ -31,6 +31,10 @@ const Navbar = () => {
     setValue(e.target.value);
   };
 
+  const handleSearch = (id) => {
+  
+    setIsModalOpen(false);
+  };
   return (
     <div className="w-full sticky top-0 z-50 bg-white/80 backdrop-blur shadow-md transition-all duration-300">
       <div className="container mx-auto flex flex-col sm:flex-row justify-between items-center px-4 sm:px-6 py-4 gap-4">
@@ -64,6 +68,7 @@ const Navbar = () => {
         open={isModalOpen}
         footer={null}
         onCancel={handleCancel}
+    
         destroyOnHidden
       >
         <input

@@ -3,6 +3,10 @@ import { useNavigate } from "react-router-dom";
 
 const SearchItem = ({ data }) => {
   const navigate = useNavigate();
+  const handleSearch = (id) => {
+    navigate(`/product/${id}`);
+    setIsModalOpen(false)
+  }
   return (
     <div>
       {data?.map((product) => (
@@ -12,7 +16,9 @@ const SearchItem = ({ data }) => {
         >
           <div
             className="flex"
-            onClick={() => navigate(`/product/${product.id}`)}
+            onClick={() => handleSearch(`/product/${product.id}`)
+          
+          }
           >
             <img
               src={product.thumbnail}

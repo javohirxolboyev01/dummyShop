@@ -77,7 +77,7 @@ const ProductItem = (product) => {
 
       <div className="px-4 pb-4 pt-2 bg-gray-100 rounded-b-2xl">
         {cartItem ? (
-          <div className="w-full h-[35px] bg-gray-300 rounded-full flex items-center justify-center gap-4 text-black">
+          <div className="w-full h-[35px]  bg-gray-300 rounded-full flex items-center justify-between px-4 gap-4 text-black">
             <button
               onClick={handleDeC}
               className="w-7 h-7  cursor-pointer rounded-full flex items-center justify-center text-base font-bold hover:bg-gray-200 hover:!text-black transition"
